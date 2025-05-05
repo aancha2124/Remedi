@@ -28,6 +28,7 @@ function Main(){
     } catch (error) {
       console.error("Error fetching answer:", error);
       setAnswer("Sorry, something went wrong.");
+      setQuestion("");
     }
   }
   
@@ -51,22 +52,22 @@ function Main(){
                  
                 <div className="cards">
 
-                    <div className="card">
+                    <div className="card" onClick={() => {setQuestion("Suggest somethings to do when you are bored in classroom") ;generateAnswer();} }>
                         <p>Suggest somethings to do when you are bored in classroom</p>
                         <img src={card1_icon} alt="card1_icon" />
                     </div>
 
-                    <div className="card">
+                    <div className="card"  onClick={() => setQuestion("Briefly summarize the concept:Urbanization")}>
                         <p>Briefly summarize the concept:Urbanization</p>
                         <img src={card2_icon} alt="card2_icon" />
                     </div>
 
-                    <div className="card">
+                    <div className="card"  onClick={() => setQuestion("Brainstrom some activity ideas for our literature club ,Verbitron")}>
                         <p>Brainstrom some activity ideas for our literature club ,Verbitron</p>
                         <img src={card3_icon} alt="card3_icon" />
                     </div>
                     
-                    <div className="card">
+                    <div className="card"  onClick={() => setQuestion("Tell me about React.js")}>
                         <p>Tell me about React.js</p>
                         <img src={card4_icon} alt="card4_icon" />
                     </div>
@@ -75,7 +76,8 @@ function Main(){
                 </div> : <p>{answer}</p> }
                 <div className="main-bottom">
                     <div className="search-box">
-                        <input type="text" value={question} onChange={(e)=> setQuestion(e.target.value)} placeholder="Enter a prompt here"/>
+                        <input type="text" value={question} onChange={(e)=> {setQuestion(e.target.value); 
+                            setAnswer("");}} placeholder="Enter a prompt here"/>
                         <div>
                             <img src={add_image_icon} alt="" />
                             <img src={voice_icon} alt="" />
