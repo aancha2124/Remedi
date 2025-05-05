@@ -15,23 +15,22 @@ function Main(){
     const [question , setQuestion] =useState("");
     const [answer , setAnswer] = useState("");
   
-  async function generateAnswer(){
-    try{
-    setAnswer("loading....")
-    const response = await axios({
-      url:"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBhYBDQ3sc03XWGy_EjVRY3gsvZTIpRUhw",
-      method:"post" ,
-      data: {
-        contents: [{
-          parts:[{text: question }]
-          },],
-         },
-    });
-    setAnswer(response['data']['candidates'][0]['content']['parts'][0]['text']);
-  }catch (error) {
-    console.error("Error fetching answer:", error);
-    setAnswer("Sorry, something went wrong.");}
+  
+
+
+  async function generateAnswer() {
+    try {
+      setAnswer("loading...");
+      const response = await axios.post("http://localhost:5000/api/gemini", {
+        question: question,
+      });
+      setAnswer(response.data.answer);
+    } catch (error) {
+      console.error("Error fetching answer:", error);
+      setAnswer("Sorry, something went wrong.");
+    }
   }
+  
         
 
 
@@ -44,7 +43,7 @@ function Main(){
              </div>
 
              <div className="main-container">
-             {question=="" ? <div className="main-top">
+             {question==="" ? <div className="main-top">
                 <div className="greet">
                     <p><span>Hello,</span></p>
                     <p>How can I help you today?</p>
